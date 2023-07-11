@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once "../database/connection.php";
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,7 +119,7 @@ h2::after {
       <div class="side_navbar">
         <span>Main Menu</span>
         <a href="banquetprofile.php" class="active">Dashboard</a>
-        <a href="newbanquet.php">Add Banquet</a>
+        <a href="newbanquet.php">Edit Banquet</a>
         <a href="ourservice.php">Our Services</a>
         <a href="newservices.php">Add Services</a>
         <a href="orderdetails.php">Order Details</a>
@@ -135,76 +142,37 @@ h2::after {
       <div class="carousel-inner">
         <div class="item carousel-item active">
           <div class="row">
+            <?php
+            $query="SELECT * FROM service";
+            $result=mysqli_query($conn, $query);
+            $data=mysqli_num_rows($result);
+            if($data>0){
+                while($row=mysqli_fetch_array($result)){
+
+            ?>
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
+                  <img src="banquetimage/<?php echo $row['serviceimage']?>" class="img-fluid" alt="">                 
                 </div>
                 <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
+                  <h4><?php echo $row['title']?></h4>                 
       
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
+                  <p class="item-price"><?php echo $row['perpeopleprice']?></p>
+                  <p><?php echo $row['limitedpeople']?></p>
+                  <p><?php echo $row['description']?></p>
+                  <a href="#" class="btn btn-primary">Delete</a>
                 </div>            
               </div>
+             </div>
+             <?php 
+           }
+         }
+         ?>
             </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-      
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>       
-    </div>
-    </div>
-  </div>
-</div>
+         </div>
+      </div>
+   </div>
+ </div>
 </body>
-</html>                                   
+</html>    

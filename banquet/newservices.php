@@ -3,13 +3,16 @@ session_start();
 require_once "../database/connection.php";
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_POST['register'])){
-        $username=$_POST['name'];
-        $email=$_POST['email'];
-        $contact=$_POST['contact'];
-        $address=$_POST['address'];
+        $title=$_POST['title'];
+        $people=$_POST['people'];
+        $price=$_POST['price'];
+        $description=$_POST['description'];
+        
+             
+
         $id=$_SESSION['banquetid'];
         $targetDirectory="banquetimage/";
-        $extension = pathinfo($_FILES['profileimage']['name'], PATHINFO_EXTENSION);
+        $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $uniqueFilename = uniqid() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
         $targetFile = $targetDirectory . $uniqueFilename;
 
@@ -17,12 +20,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $validate=true;
         
         if($validate){
-            $query= "UPDATE banquet_tb SET name='$username',email='$email',contact='$contact',address='$address', profile_img='$uniqueFilename' WHERE id='$id'";
-
+            $query= "INSERT INTO service (banquetid,title, limitedpeople, perpeopleprice,description,serviceimage) VALUES ('$id','$title','$people', '$price','$description','$uniqueFilename')";
             $execute=mysqli_query($conn, $query);
-            if($execute && move_uploaded_file($_FILES['profileimage']['tmp_name'],$targetFile)){
+
+            if($execute && move_uploaded_file($_FILES['image']['tmp_name'],$targetFile)){
                 
-                header("location:banquetprofile.php");
+                header("location:ourservice.php");
             }
             else{
                 echo "Not executed";
@@ -52,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       <div class="side_navbar">
          <span>Main Menu</span>
         <a href="banquetprofile.php" class="active">Dashboard</a>
-        <a href="newbanquet.php">Add Banquet</a>
+        <a href="newbanquet.php">Edit Banquet</a>
         <a href="ourservice.php">Our Services</a>
         <a href="newservices.php">Add Services</a>
         <a href="orderdetails.php">Order Details</a>
@@ -81,16 +84,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                             <label for="price">Per Person Price</label>
                         </div>
                         <div class="input-field">
-                            <input type="text" class="input" id="food" required autocomplete="off" name="food">
-                            <label for="food">Available Food</label>
-                        </div>
-                        <div class="input-field">
                             <input type="text" class="input" id="description" required autocomplete="off" name="description">
                             <label for="description">Description</label>
                         </div>
         
                          <div class="input-field">
-                        <input type="file" id="image"  name="images[]">
+                        <input type="file" id="image"  name="image">
                         <ul id="image-list"></ul>
                         <div id="image-container"></div>
                         

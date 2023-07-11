@@ -9,7 +9,14 @@
   <title>Banquet Page</title>
   <link rel="stylesheet" href="css/userpage.css" />
   <!-- Font Link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/userpage.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -18,7 +25,8 @@
         <span>Main Menu</span>
         <a href="userprofile.php" class="active">Dashboard</a>
         <a href="rec.php">Recommend Me</a>
-        <a href="">Selected Banquet Details</a>
+        <a href="userbanqdetails.php">Selected Banquet Details</a>
+        <a href="">Change Password</a>
         <a href="logout.php">Logout</a>
         
       </div>
@@ -31,6 +39,7 @@
         <span> To the Banquet Recommendation System</span>
        
       </div>
+
 </body>
 </html>
 
