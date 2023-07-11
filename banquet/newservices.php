@@ -1,0 +1,125 @@
+<?php
+session_start();
+require_once "../database/connection.php";
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    if(isset($_POST['register'])){
+        $username=$_POST['name'];
+        $email=$_POST['email'];
+        $contact=$_POST['contact'];
+        $address=$_POST['address'];
+        $id=$_SESSION['banquetid'];
+        $targetDirectory="banquetimage/";
+        $extension = pathinfo($_FILES['profileimage']['name'], PATHINFO_EXTENSION);
+        $uniqueFilename = uniqid() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
+        $targetFile = $targetDirectory . $uniqueFilename;
+
+        
+        $validate=true;
+        
+        if($validate){
+            $query= "UPDATE banquet_tb SET name='$username',email='$email',contact='$contact',address='$address', profile_img='$uniqueFilename' WHERE id='$id'";
+
+            $execute=mysqli_query($conn, $query);
+            if($execute && move_uploaded_file($_FILES['profileimage']['tmp_name'],$targetFile)){
+                
+                header("location:banquetprofile.php");
+            }
+            else{
+                echo "Not executed";
+            }
+        }
+
+    }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/banquetprofile.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <title>Banquet Recommendation System</title>
+</head>
+<body>
+
+  <div class="container">
+    <nav>
+      <div class="side_navbar">
+         <span>Main Menu</span>
+        <a href="banquetprofile.php" class="active">Dashboard</a>
+        <a href="newbanquet.php">Add Banquet</a>
+        <a href="ourservice.php">Our Services</a>
+        <a href="newservices.php">Add Services</a>
+        <a href="orderdetails.php">Order Details</a>
+        <a href="logoutbanquet.php">Logout</a>
+      </div>
+    </nav>
+
+    <div class="main-body">
+      <form class="form" action="#" method="POST" enctype="multipart/form-data">
+    <div class="wrapper">
+        <div class="container main">
+            <div class="row">
+                     <div class="input-box">
+                        <header>New Services Form</header>
+            
+                        <div class="input-field">
+                            <input type="text" class="input" id="title" required autocomplete="off" name="title">
+                            <label for="title">Service Title</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" class="input" id="people" required autocomplete="off" name="people">
+                            <label for="people">Limited Number of People</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" class="input" id="price" required autocomplete="off" name="price">
+                            <label for="price">Per Person Price</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" class="input" id="food" required autocomplete="off" name="food">
+                            <label for="food">Available Food</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" class="input" id="description" required autocomplete="off" name="description">
+                            <label for="description">Description</label>
+                        </div>
+        
+                         <div class="input-field">
+                        <input type="file" id="image"  name="images[]">
+                        <ul id="image-list"></ul>
+                        <div id="image-container"></div>
+                        
+                
+                           </div>
+
+
+                        <div class="input-field">
+                            <input type="submit" class="submit" value="Register" name="register">
+                            
+                        </div>
+                     </div>
+                
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+
+</body>
+<script>
+
+  $(document).ready(function() {
+    $('#add-image').click(function() {
+      var imageInput = $('#image').clone();
+      $('#image-container').append(imageInput);
+    });
+  });
+</script>
+</html>
+
