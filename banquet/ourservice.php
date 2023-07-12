@@ -2,6 +2,15 @@
 session_start();
 require_once "../database/connection.php";
 
+if($_SERVER["REQUEST_METHOD"]=="GET"){
+    if(isset($_GET['serviceid'])){
+      $serviceid = $_GET['serviceid'];
+      $query = "DELETE FROM service WHERE service_id = '$serviceid'";
+      if(mysqli_query($conn, $query)){
+        echo "service deleted";
+      }
+    }
+  }
 ?>
 
 
@@ -161,7 +170,7 @@ h2::after {
                   <p class="item-price"><?php echo $row['perpeopleprice']?></p>
                   <p><?php echo $row['limitedpeople']?></p>
                   <p><?php echo $row['description']?></p>
-                  <a href="#" class="btn btn-primary">Delete</a>
+                  <a href="ourservice.php?serviceid=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
                 </div>            
               </div>
              </div>
