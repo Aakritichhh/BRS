@@ -1,3 +1,30 @@
+<?php
+session_start();
+require('../database/connection.php');
+
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    if(isset($_POST['login'])){
+        $email=$_POST['email'];
+        $password=$_POST['password'];
+
+        $sql = "select * from admin where email = '$email' and password='$password'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $count = mysqli_num_rows($result);
+
+        if($count == 1) {
+          $_SESSION['adminid'] = $row['id'];
+          $_SESSION['adminemail'] = $row['email'];
+          header('location: adminprofile.php');
+        } else {
+            echo "login failed";
+        }
+
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
