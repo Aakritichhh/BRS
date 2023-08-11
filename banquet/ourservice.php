@@ -3,6 +3,7 @@ session_start();
 require_once "../database/connection.php";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if($_SERVER["REQUEST_METHOD"]=="GET") {
   if(isset($_GET['delete'])){
     $serviceId = $_GET['id'];
@@ -15,6 +16,8 @@ if($_SERVER["REQUEST_METHOD"]=="GET") {
   }
 }
 =======
+=======
+>>>>>>> origin/main
 if($_SERVER["REQUEST_METHOD"]=="GET"){
     if(isset($_GET['serviceid'])){
       $serviceid = $_GET['serviceid'];
@@ -24,6 +27,9 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
       }
     }
   }
+<<<<<<< HEAD
+>>>>>>> origin/main
+=======
 >>>>>>> origin/main
 ?>
 
@@ -182,7 +188,11 @@ h2::after {
                   <p><?php echo $row['limitedpeople']?></p>
                   <p><?php echo $row['description']?></p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <a href="ourservice.php?delete=1&id=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
+=======
+                  <a href="ourservice.php?serviceid=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
+>>>>>>> origin/main
 =======
                   <a href="ourservice.php?serviceid=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
 >>>>>>> origin/main
