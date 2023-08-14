@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['adminemail']) && !isset($_SESSION['id'])){
+    header("Location: adminloginform.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +32,7 @@
       <div class="promo_card">
         <h1>Welcome to Admin Page</h1>
         <span> For Banquet Recommendation System</span>
+        <p>Email: <?php echo $_SESSION['adminemail'] ?></p>
       </div>
 </body>
 </html>
