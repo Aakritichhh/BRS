@@ -26,7 +26,7 @@
         <a href="userprofile.php" class="active">Dashboard</a>
         <a href="rec.php">Recommend Me</a>
         <a href="userbanqdetails.php">Selected Banquet Details</a>
-        <a href="">Change Password</a>
+        <a href="changepassword.php">Change Password</a>
         <a href="logout.php">Logout</a>
         
       </div>

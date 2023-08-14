@@ -1,3 +1,19 @@
+<?php
+session_start();
+require_once "../database/connection.php";
+
+if($_SERVER["REQUEST_METHOD"]=="GET"){
+    if(isset($_GET['serviceid'])){
+      $serviceid = $_GET['serviceid'];
+      $query = "DELETE FROM service WHERE service_id = '$serviceid'";
+      if(mysqli_query($conn, $query)){
+        echo "service deleted";
+      }
+    }
+  }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +23,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/userpage.css" />
+ <link rel="stylesheet" href="css/banquetprofile.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -105,25 +121,25 @@ h2::after {
 }
 
 </style>
-
 </head>
 <body>
-  <div class="container">
+   <div class="container">
     <nav>
       <div class="side_navbar">
         <span>Main Menu</span>
-        <a href="userprofile.php" class="active">Dashboard</a>
-        <a href="rec.php">Recommend Me</a>
-        <a href="userbanqdetails.php">Selected Banquet Details</a>
-        <a href="changepassword.php">Change Password</a>
-        <a href="logout.php">Logout</a>
+        <a href="banquetprofile.php" class="active">Dashboard</a>
+        <a href="newbanquet.php">Edit Banquet</a>
+        <a href="ourrecommended.php">Our Recommended Banquet</a>
+        <a href="newservices.php">Add Services</a>
+        <a href="orderdetails.php">Order Details</a>
+        <a href="logoutbanquet.php">Logout</a>
         
       </div>
     </nav>
 <div class="container-xl">
   <div class="row">
     <div class="col-md-12">
-      <h2>Our<b>Services</b></h2>
+      <h2>Recommended<b>Banquet</b></h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
       <!-- Carousel indicators -->
       <ol class="carousel-indicators">
@@ -135,76 +151,37 @@ h2::after {
       <div class="carousel-inner">
         <div class="item carousel-item active">
           <div class="row">
+            <?php
+            $query="SELECT * FROM service";
+            $result=mysqli_query($conn, $query);
+            $data=mysqli_num_rows($result);
+            if($data>0){
+                while($row=mysqli_fetch_array($result)){
+
+            ?>
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
+                  <img src="banquetimage/<?php echo $row['serviceimage']?>" class="img-fluid" alt="">                 
                 </div>
                 <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
+                  <h4><?php echo $row['title']?></h4>                 
       
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
+                  <p class="item-price"><?php echo $row['perpeopleprice']?></p>
+                  <p><?php echo $row['limitedpeople']?></p>
+                  <p><?php echo $row['description']?></p>
+                  <a href="ourservice.php?serviceid=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
                 </div>            
               </div>
+             </div>
+             <?php 
+           }
+         }
+         ?>
             </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-      
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>       
-    </div>
-    </div>
-  </div>
-</div>
+         </div>
+      </div>
+   </div>
+ </div>
 </body>
-</html>                                   
+</html>    
