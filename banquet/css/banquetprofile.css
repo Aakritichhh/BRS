@@ -22,6 +22,7 @@ body{
 /* Side menubar section */
 nav{
   background: lightgray;
+  width: 15rem;
 }
 .side_navbar{
   padding: 1px;

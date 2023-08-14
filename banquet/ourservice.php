@@ -2,6 +2,22 @@
 session_start();
 require_once "../database/connection.php";
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+if($_SERVER["REQUEST_METHOD"]=="GET") {
+  if(isset($_GET['delete'])){
+    $serviceId = $_GET['id'];
+
+    $query = "DELETE FROM service WHERE service_id = $serviceId";
+
+    if(mysqli_query($conn, $query)) {
+      header("Refresh:0; url=ourservice.php");
+    }
+  }
+}
+=======
+=======
+>>>>>>> origin/main
 if($_SERVER["REQUEST_METHOD"]=="GET"){
     if(isset($_GET['serviceid'])){
       $serviceid = $_GET['serviceid'];
@@ -11,6 +27,10 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
       }
     }
   }
+<<<<<<< HEAD
+>>>>>>> origin/main
+=======
+>>>>>>> origin/main
 ?>
 
 
@@ -21,12 +41,9 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Services</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  <link rel="stylesheet" href="css/banquetprofile.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
 <style>
 body {
   background: #e2eaef;
@@ -170,7 +187,15 @@ h2::after {
                   <p class="item-price"><?php echo $row['perpeopleprice']?></p>
                   <p><?php echo $row['limitedpeople']?></p>
                   <p><?php echo $row['description']?></p>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                  <a href="ourservice.php?delete=1&id=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
+=======
                   <a href="ourservice.php?serviceid=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
+>>>>>>> origin/main
+=======
+                  <a href="ourservice.php?serviceid=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
+>>>>>>> origin/main
                 </div>            
               </div>
              </div>
