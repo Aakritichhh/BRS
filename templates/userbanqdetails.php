@@ -114,16 +114,16 @@ h2::after {
         <span>Main Menu</span>
         <a href="userprofile.php" class="active">Dashboard</a>
         <a href="rec.php">Recommend Me</a>
-        <a href="userbanqdetails.php">Selected Banquet Details</a>
+        <a href="userbanqdetails.php">My Order</a>
         <a href="changepassword.php">Change Password</a>
         <a href="logout.php">Logout</a>
         
       </div>
     </nav>
-<div class="container-xl">
+    <div class="container-xl">
   <div class="row">
     <div class="col-md-12">
-      <h2>Our<b>Services</b></h2>
+      <h2>My<b>Order Details</b></h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
       <!-- Carousel indicators -->
       <ol class="carousel-indicators">
@@ -189,19 +189,7 @@ h2::after {
                 </div>            
               </div>
             </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>       
+              
     </div>
     </div>
   </div>

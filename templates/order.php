@@ -20,8 +20,18 @@
         <label for="number">Number of People</label>
           <input type="number" id="number" name="people" placeholder="Number of People" required="">
   
-        <label for="service">Select your service type</label>
-          <input type="text" id="service" name="service" placeholder="Select your services" required="">
+        <label>
+          <span>Service type</span>
+          <select id="service">
+      <option value="Weaning Ceremony">For Weaning Ceremony</option>
+      <option value="Weeding Ceremony">For Weeding Ceremony</option>
+      <option value="Birthday Celebration">For Birthday Celebration</option>
+      <option value="Holiday Celebrations">For Holiday Celebrations</option>
+      <option value="Farewell Programs">For Farewell Programs</option>
+      <option value="Charity Events">For Charity Events</option>
+         </select>
+       </label>
+
         </div>
         <button class="form-submit-btn" type="submit">Book the Venue</button>
       </form>

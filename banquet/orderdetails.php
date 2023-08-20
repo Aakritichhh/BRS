@@ -32,13 +32,14 @@ tr:nth-child(even) {
   <div class="container">
     <nav>
       <div class="side_navbar">
-         <span>Main Menu</span>
+        <span>Main Menu</span>
         <a href="banquetprofile.php" class="active">Dashboard</a>
         <a href="newbanquet.php">Edit Banquet</a>
-        <a href="ourrecommended.php">Our Recommended Banquet</a>
+        <a href="ourservice.php">Our Services</a>
         <a href="newservices.php">Add Services</a>
         <a href="orderdetails.php">Order Details</a>
         <a href="logoutbanquet.php">Logout</a>
+        
       </div>
     </nav>
 

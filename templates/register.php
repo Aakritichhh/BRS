@@ -7,13 +7,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $username=$_POST['username'];
         $password=$_POST['password'];
         $cpassword=$_POST['cpassword'];
+        $contact=$_POST['contact'];
+
         
         $validate=true;
         if($password!=$cpassword){
             $validate=false;
         }
         if($validate){
-            $query= "INSERT INTO user (username, email, password) VALUES ('$username','$email', '$password')";
+            $query= "INSERT INTO user (username, email, password,contact) VALUES ('$username','$email', '$password','$contact')";
             $execute=mysqli_query($conn, $query);
             if($execute){
                 header("location:Login.php");
@@ -45,6 +47,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
        <p class="form-title">Sign up to your account</p>
        <div class="input-container">
           <input placeholder="Enter your name" type="username" name="username">
+          
+      </div>
+      <div class="input-container">
+          <input placeholder="Enter your contact " type="text" name="contact">
           
       </div>
 

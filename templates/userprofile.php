@@ -25,7 +25,7 @@
         <span>Main Menu</span>
         <a href="userprofile.php" class="active">Dashboard</a>
         <a href="rec.php">Recommend Me</a>
-        <a href="userbanqdetails.php">Selected Banquet Details</a>
+        <a href="userbanqdetails.php">My Order</a>
         <a href="changepassword.php">Change Password</a>
         <a href="logout.php">Logout</a>
         

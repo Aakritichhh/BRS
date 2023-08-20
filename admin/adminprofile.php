@@ -19,9 +19,8 @@
       <div class="side_navbar">
         <span>Main Menu</span>
         <a href="adminprofile.php" class="active">Dashboard</a>
-        <a href="newbanquet.php">New Banquet Details</a>
-         <a href="selectedbanquet.php">Selected Banquet Details</a>
-         <a href="contact.php">Contact Details</a>
+        <a href="newbanquet.php">Banquet Details</a>
+         <a href="selectedbanquet.php">User Details</a>
         <a href="logoutadmin.php">Logout</a>
         
       </div>

@@ -14,8 +14,8 @@
       <div class="side_navbar">
         <span>Main Menu</span>
         <a href="userprofile.php" class="active">Dashboard</a>
-        <a href="recommend.php">Recommend Me</a>
-        <a href="userbanqdetails.php">Selected Banquet Details</a>
+        <a href="rec.php">Recommend Me</a>
+        <a href="userbanqdetails.php">My Order</a>
         <a href="changepassword.php">Change Password</a>
         <a href="logout.php">Logout</a>
         
@@ -26,18 +26,7 @@
       <h2>Dashboard</h2>
       <form class="form">
     <p class="title">Banquet Near Me</p>
-    <p class="message">Fill the details to find the best banquet for you </p>
-        <div class="flex">
-        <label>
-            <input required="" placeholder="" type="text" class="input">
-            <span>Name</span>
-        </label>
-
-        <label>
-            <input required="" placeholder="" type="text" class="input">
-            <span>Location</span>
-        </label>
-    </div>  
+    <p class="message">Fill the details to find the best banquet for you </p> 
             
     <label>
         <input required="" placeholder="" type="budget" class="input">
@@ -61,10 +50,8 @@
         <input required="" placeholder="" type="number" class="input">
         <span>Total Number of People</span>
     </label>
-     <label>
-        <input required="" placeholder="" type="contact" class="input">
-        <span>Contact Details</span>
-    </label>
+    <button class="submit">Location</button>
+     
     <button class="submit">Submit</button>
 
 </form>

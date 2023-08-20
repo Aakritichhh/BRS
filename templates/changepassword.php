@@ -1,3 +1,34 @@
+<?php
+session_start();
+require('../database/connection.php');
+
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    if(isset($_POST['submit'])){
+        $oldPassword=$_POST['old'];
+        $newPassword=$_POST['new'];
+        $confirmPassword=$_POST['confirm'];
+        $userid = $_SESSION['userid'];
+        $sql = "SELECT password FROM user WHERE id='$userid'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $count = mysqli_num_rows($result);
+        if($newPassword!=$confirmPassword){
+          $count = 0;
+        }
+
+        if($count == 1) {
+          $updateQuery = "UPDATE user SET password='$newPassword' WHERE id='$userid'";
+          if(mysqli_query($conn, $updateQuery)){
+            header('location: userprofile.php');
+          }
+        } else {
+            echo "login failed";
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 
 

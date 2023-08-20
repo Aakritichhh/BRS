@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Services</title>
+  <meta charset="UTF-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="css/adminprofile.css" />
+  <!-- Font Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/userpage.css" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -105,25 +106,23 @@ h2::after {
 }
 
 </style>
-
 </head>
 <body>
   <div class="container">
     <nav>
       <div class="side_navbar">
         <span>Main Menu</span>
-        <a href="userprofile.php" class="active">Dashboard</a>
-        <a href="rec.php">Recommend Me</a>
-        <a href="userbanqdetails.php">My Order</a>
-        <a href="changepassword.php">Change Password</a>
-        <a href="logout.php">Logout</a>
+        <a href="adminprofile.php" class="active">Dashboard</a>
+        <a href="newbanquet.php">Banquet Details</a>
+         <a href="selectedbanquet.php">User Details</a>
+        <a href="logoutadmin.php">Logout</a>
         
       </div>
     </nav>
-<div class="container-xl">
+    <div class="container-xl">
   <div class="row">
     <div class="col-md-12">
-      <h2>Our<b>Services</b></h2>
+      <h2>Banquet<b>Details</b></h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
       <!-- Carousel indicators -->
       <ol class="carousel-indicators">
@@ -145,11 +144,10 @@ h2::after {
       
                   <p class="item-price">150000</p>
                   <p>Kalimati</p>
-                  <a href="order.php" class="btn btn-primary">Book</a>
+                  <a href="#" class="btn btn-primary">Show</a>
                 </div>            
               </div>
             </div>
-            
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
@@ -157,15 +155,20 @@ h2::after {
                 </div>
                 <div class="thumb-content">
                   <h4>Kalimati Banquet</h4>                 
+      
                   <p class="item-price">150000</p>
                   <p>Kalimati</p>
-                  <a href="order.php" class="btn btn-primary">Book</a>
+                  <a href="#" class="btn btn-primary">Show</a>
                 </div>            
               </div>
-            </div>       
+            </div>
+            
+            
+            
     </div>
     </div>
   </div>
 </div>
+
 </body>
-</html>                                   
+</html>
