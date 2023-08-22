@@ -1,5 +1,8 @@
 <?php
   session_start();
+  if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="True") {
+    header("Location: Login.php");
+  }
 ?>
 
 <!DOCTYPE html>

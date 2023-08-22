@@ -1,6 +1,11 @@
 <?php
 session_start();
 require('../database/connection.php');
+if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="True") {
+  $_SESSION['userid'] = $_COOKIE['userid'];
+  $_SESSION['useremail'] = $_COOKIE['useremail'];
+  header("Location: userprofile.php");
+}
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_POST['login'])){
@@ -14,6 +19,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
         if($count == 1) {
           $_SESSION['userid'] = $row['id'];
+          $_SESSION['useremail'] = $row['email'];
+          setcookie("userid", $row['id'], time()+86400, "BRS");
+          setcookie("userauth", "True", time()+86400, "BRS");
+          setcookie("useremail", $row['email'], time()+86400, "BRS");
           header('location: userprofile.php');
         } else {
             echo "login failed";
