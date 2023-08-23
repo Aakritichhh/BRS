@@ -16,7 +16,6 @@ if($_SERVER["REQUEST_METHOD"]=="GET") {
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,22 +119,33 @@ h2::after {
   padding: 2px 0;
 }
 
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
 </style>
 </head>
 <body>
-   <div class="container">
+  <div class="container">
     <nav>
       <div class="side_navbar">
-        <span>Main Menu</span>
-        <a href="banquetprofile.php" class="active">Dashboard</a>
-        <a href="newbanquet.php">Edit Banquet</a>
-        <a href="ourservice.php">Our Services</a>
-        <a href="newservices.php">Add Services</a>
-        <a href="orderdetails.php">Order Details</a>
-        <a href="logoutbanquet.php">Logout</a>
-        
+                <a href="adminprofile.php" class="active"><b>Go Back</b></a>
       </div>
     </nav>
+   
+    
 <div class="container-xl">
   <div class="row">
     <div class="col-md-12">
@@ -170,7 +180,7 @@ h2::after {
                   <p class="item-price"><?php echo $row['perpeopleprice']?></p>
                   <p><?php echo $row['limitedpeople']?></p>
                   <p><?php echo $row['description']?></p>
-                  <a href="ourservice.php?delete=1&id=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
+                  <a href="banquet/ourservice.php?delete=1&id=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
                 </div>            
               </div>
              </div>
@@ -183,6 +193,73 @@ h2::after {
       </div>
    </div>
  </div>
- 
+ <div class="container-xl">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Order<b>Details</b></h2>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+      <!-- Carousel indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>   
+    </div>
+  </div>
+</div>
+</div>
+
+ <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">S.N</th>
+      <th scope="col">Username</th>
+      <th scope="col">Address</th>
+    
+      <th scope="col">Contact</th>
+      <th scope="col">Service Type</th>
+      <th scope="col">Booked Date</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>

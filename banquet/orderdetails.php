@@ -94,3 +94,5 @@ tr:nth-child(even) {
     </tr>
   </tbody>
 </table>
+</body>
+</html>

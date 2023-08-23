@@ -144,26 +144,10 @@ h2::after {
       
                   <p class="item-price">150000</p>
                   <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Show</a>
+                  <a href="adminbanquetdetail.php" class="btn btn-primary">Show</a>
                 </div>            
               </div>
             </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-      
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Show</a>
-                </div>            
-              </div>
-            </div>
-            
-            
             
     </div>
     </div>
