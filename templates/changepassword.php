@@ -55,10 +55,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         <div class="input-container">
           <input placeholder="Confirm password" type="confirm" name="confirm">
         </div>
-
-
-          
-        </div>
+        
          <input class="submit" type="submit" name="submit" value="submit">
         
       

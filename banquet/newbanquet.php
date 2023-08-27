@@ -12,11 +12,41 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $extension = pathinfo($_FILES['profileimage']['name'], PATHINFO_EXTENSION);
         $uniqueFilename = uniqid() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
         $targetFile = $targetDirectory . $uniqueFilename;
+        $errors = array();
+   
+   // Validate username
+   if (empty($username)) {
+      $errors["name"] = "Banquet name is required";
+   }
 
-        
-        $validate=true;
-        
-        if($validate){
+   // Validate address
+   if (empty($address)) {
+      $errors["address"] = "Address is required";
+   }
+
+   // Validate image
+   if (empty($extension)) {
+      $errors["profileimage"] = "Image is required";
+   }
+   
+   // Validate contact
+   if (empty($contact)) {
+      $errors["contact"] = "Contact is required";
+   } 
+   elseif (!preg_match("/^\d{10}$/", $contact)) 
+   {
+      $errors["contact"] = "Invalid Contact. Please enter a 10-digit number.";
+   }
+
+   //validate email
+   if (empty($email)) {
+      $errors["email"] = "Email is required";
+   }
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $errors["email"] = "Invalid Email";
+   }
+         
+        if (empty($errors)) {
             $query= "UPDATE banquet_tb SET name='$username',email='$email',contact='$contact',address='$address', profile_img='$uniqueFilename' WHERE id='$id'";
 
             $execute=mysqli_query($conn, $query);
@@ -33,7 +63,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 }
 
 ?>
-
 
  <!DOCTYPE html>
 <html lang="en">
@@ -75,18 +104,22 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                         <div class="input-field">
                             <input type="text" class="input" id="name" required autocomplete="off" name="name">
                             <label for="name">Banquet Name</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["name"]) ? $errors["name"] : ""; ?></span>
                         </div>
                         <div class="input-field">
                             <input type="text" class="input" id="email" required autocomplete="off" name="email">
                             <label for="email">Email</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["email"]) ? $errors["email"] : ""; ?></span>
                         </div>
                         <div class="input-field">
                             <input type="text" class="input" id="contact" required autocomplete="off" name="contact">
                             <label for="contact">Contact Details</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["contact"]) ? $errors["contact"] : ""; ?></span>
                         </div>
                         <div class="input-field">
                             <input type="text" class="input" id="Location" required autocomplete="off" name="address">
                             <label for="Location">Address</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["address"]) ? $errors["address"] : ""; ?></span>
                         </div>
                         <div class="input-field">
                             <button type="button" onclick="getlocation">Get Location</button>
@@ -98,10 +131,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         
                          <div class="input-field">
                         <input type="file" id="image"  name="profileimage">
-                        
-                
+                        <span class="error" style="color:red;"><?php echo isset($errors["profileimage"]) ? $errors["profileimage"] : ""; ?></span>
                            </div>
-
 
                         <div class="input-field">
                             <input type="submit" class="submit" value="Register" name="register">

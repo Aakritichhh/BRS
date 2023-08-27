@@ -6,7 +6,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_POST['Signin'])){
         $email=$_POST['email'];
         $password=$_POST['password'];
+         $errors = array();
+         //validate email
+            if (empty($email)) {
+                 $errors["email"] = "Email is required";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors["email"] = "Invalid Email";
+   }
+   
+             // Validate password 
+            if (empty($password)) {
+               $errors["password"] = "Password is required";
+                 }
 
+ if (empty($errors)) {
         $sql = "select * from banquet_tb where email = '$email' and password='$password'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -27,6 +40,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         }
 
     }
+}
 }
 
 ?>
@@ -56,12 +70,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                      <div class="input-box">
                         <header>Banquet Login Form</header>
                         <div class="input-field">
-                            <input type="text" class="input" id="email" required autocomplete="off" name="email">
+                            <input type="text" class="input" id="email"  name="email">
                             <label for="email">Email</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["email"]) ? $errors["email"] : ""; ?></span>
                         </div>
                         <div class="input-field">
                             <input type="password" class="input" id="password" name="password">
                             <label for="password">Password</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["password"]) ? $errors["password"] : ""; ?></span>
                         </div>
                         <div class="input-field">
                             <input type="submit" class="submit" value="Sign in" name="Signin">

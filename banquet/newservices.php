@@ -7,19 +7,37 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $people=$_POST['people'];
         $price=$_POST['price'];
         $description=$_POST['description'];
-        
-             
-
         $id=$_SESSION['banquetid'];
         $targetDirectory="banquetimage/";
         $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $uniqueFilename = uniqid() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
         $targetFile = $targetDirectory . $uniqueFilename;
+        $errors = array();
 
+        // Validate title
+   if (empty($title)) {
+      $errors["title"] = "title is required";
+   }
+      // Validate people
+   if (empty($people)) {
+      $errors["people"] = "Number of people is required";
+   }
+        // Validate price
+   if (empty($price)) {
+      $errors["price"] = "Price is required";
+   }
+      // Validate description
+   if (empty($description)) {
+      $errors["description"] = "Description is required";
+   }
+        // Validate image
+   if (empty($extension)) {
+      $errors["image"] = "Image is required";
+   }
+
+
+        if (empty($errors)) {
         
-        $validate=true;
-        
-        if($validate){
             $query= "INSERT INTO service (banquetid,title, limitedpeople, perpeopleprice,description,serviceimage) VALUES ('$id','$title','$people', '$price','$description','$uniqueFilename')";
             $execute=mysqli_query($conn, $query);
 
@@ -75,26 +93,29 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                         <div class="input-field">
                             <input type="text" class="input" id="title" required autocomplete="off" name="title">
                             <label for="title">Service Title</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["title"]) ? $errors["title"] : ""; ?></span>
                         </div>
                         <div class="input-field">
                             <input type="text" class="input" id="people" required autocomplete="off" name="people">
                             <label for="people">Limited Number of People</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["people"]) ? $errors["people"] : ""; ?></span>
                         </div>
                         <div class="input-field">
                             <input type="text" class="input" id="price" required autocomplete="off" name="price">
                             <label for="price">Per Person Price</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["price"]) ? $errors["price"] : ""; ?></span>
                         </div>
                         <div class="input-field">
                             <input type="text" class="input" id="description" required autocomplete="off" name="description">
                             <label for="description">Description</label>
+                            <span class="error" style="color:red;"><?php echo isset($errors["description"]) ? $errors["description"] : ""; ?></span>
                         </div>
         
                          <div class="input-field">
                         <input type="file" id="image"  name="image">
+                        <span class="error" style="color:red;"><?php echo isset($errors["image"]) ? $errors["image"] : ""; ?></span>
                         <ul id="image-list"></ul>
                         <div id="image-container"></div>
-                        
-                
                            </div>
 
 
@@ -103,7 +124,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                             
                         </div>
                      </div>
-                
             </div>
         </div>
     </div>

@@ -34,17 +34,17 @@
     </label> 
         
     <label>
-        <!-- <input required="" placeholder="" type="text" class="input"> -->
-        <span>Service type</span>
-        <select id="service">
-      <option value="Weaning Ceremony">For Weaning Ceremony</option>
-      <option value="Weeding Ceremony">For Weeding Ceremony</option>
-      <option value="Birthday Celebration">For Birthday Celebration</option>
-      <option value="Holiday Celebrations">For Holiday Celebrations</option>
-      <option value="Farewell Programs">For Farewell Programs</option>
-      <option value="Charity Events">For Charity Events</option>
-    </select>
-    </label>
+    <span>Service type</span>
+    <select id="service" type="service" class="input" required>
+        <option></option>
+        <option value="Weaning Ceremony">For Weaning Ceremony</option>
+        <option value="Weeding Ceremony">For Weeding Ceremony</option>
+        <option value="Birthday Celebration">For Birthday Celebration</option>
+        <option value="Holiday Celebrations">For Holiday Celebrations</option>
+        <option value="Farewell Programs">For Farewell Programs</option>
+          <option value="Charity Events">For Charity Events</option>
+        </select>
+      </label>
 
     <label>
         <input required="" placeholder="" type="number" class="input">
@@ -58,4 +58,32 @@
       </div>
 </body>
 </html>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".form");
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const budget = document.querySelector(".input[type='budget']").value;
+      const service = document.querySelector(".input[type='service']").value;
+      const totalPeople = document.querySelector(".input[type='number']").value;
+
+      // Validate budget (assuming it should be a positive number)
+      if (!budget || isNaN(parseFloat(budget)) || parseFloat(budget) <= 0) {
+        alert("Please enter a valid budget.");
+        return;
+      }
+
+      // Validate total number of people
+      if (!totalPeople || isNaN(parseInt(totalPeople)) || parseInt(totalPeople) <= 0) {
+        alert("Please enter a valid total number of people.");
+        return;
+      }
+
+      alert("Form submitted successfully!");
+    
+    });
+  });
+</script>
+
 
