@@ -39,6 +39,10 @@
        <?php 
         echo $_SESSION['banquetemail'];
       ?>
+      <span>Banquet Name:</span><br>
+      <span>Contact Details:</span><br>
+      <span>Address:</span><br>
+      <img src="images/banquet.jpg" alt="image">
       </div>
     </div>
   </div>

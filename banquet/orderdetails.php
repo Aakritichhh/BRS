@@ -63,7 +63,8 @@ tr:nth-child(even) {
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td><button style="color: green;">Accept</button>
+      <button style="color:red;">Reject</button></td>
     </tr>
     <tr>
       <th scope="row">2</th>
@@ -72,7 +73,8 @@ tr:nth-child(even) {
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td><button style="color: green;">Accept</button>
+      <button style="color:red;">Reject</button></td>
     </tr>
     <tr>
       <th scope="row">3</th>
@@ -81,7 +83,8 @@ tr:nth-child(even) {
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td><button style="color: green;">Accept</button>
+      <button style="color:red;">Reject</button></td>
     </tr>
     <tr>
       <th scope="row">4</th>
@@ -90,7 +93,10 @@ tr:nth-child(even) {
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td><button style="color: green;">Accept</button>
+      <button style="color:red;">Reject</button></td>
     </tr>
   </tbody>
 </table>
+</body>
+</html>

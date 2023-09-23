@@ -2,24 +2,30 @@
 session_start();
 require_once "../database/connection.php";
 
+if($_SERVER["REQUEST_METHOD"]=="GET") {
+  if(isset($_GET['delete'])){
+    $serviceId = $_GET['id'];
+
+    $query = "DELETE FROM service WHERE service_id = $serviceId";
+
+    if(mysqli_query($conn, $query)) {
+      header("Refresh:0; url=ourservice.php");
+    }
+  }
+}
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Admin Page</title>
-  <link rel="stylesheet" href="css/adminprofile.css" />
-  <!-- Font Link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Services</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="css/banquetprofile.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
 <style>
 body {
   background: #e2eaef;
@@ -112,25 +118,23 @@ h2::after {
   font-size: 13px;
   padding: 2px 0;
 }
-
 </style>
+
+
 </head>
 <body>
   <div class="container">
     <nav>
       <div class="side_navbar">
-        <span>Main Menu</span>
-        <a href="adminprofile.php" class="active">Dashboard</a>
-        <a href="newbanquet.php">Banquet Details</a>
-         <a href="selectedbanquet.php">User Details</a>
-        <a href="logoutadmin.php">Logout</a>
-        
+                <a href="adminprofile.php" class="active"><b>Go Back</b></a>
       </div>
     </nav>
-    <div class="container-xl">
+   
+    
+<div class="container-xl">
   <div class="row">
     <div class="col-md-12">
-      <h2>Banquet<b>Details</b></h2>
+      <h2>User<b>Profile</b></h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
       <!-- Carousel indicators -->
       <ol class="carousel-indicators">
@@ -143,36 +147,36 @@ h2::after {
         <div class="item carousel-item active">
           <div class="row">
             <?php
-            $query="SELECT * FROM banquet_tb";
-            $result = mysqli_query($conn, $query);
+            $query="SELECT * FROM service";
+            $result=mysqli_query($conn, $query);
             $data=mysqli_num_rows($result);
-
             if($data>0){
                 while($row=mysqli_fetch_array($result)){
 
-            
-?>
+            ?>
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
-                  <img src="../banquet/banquetimage/<?php echo $row['profile_img']?>" class="img-fluid" alt="">                 
+                  <img src="banquetimage/<?php echo $row['serviceimage']?>" class="img-fluid" alt="">                 
                 </div>
                 <div class="thumb-content">
-                  <h4><?php echo $row['name']?></h4>                 
+                  <h4><?php echo $row['title']?></h4>                 
       
-                  <p class="item-price"><?php echo $row['address']?></p>
-                  <p></p>
-                  <a href="adminbanquetdetail.php?id=<?php echo $row['id']?>" class="btn btn-primary">Show</a>
+                  <p class="item-price"><?php echo $row['perpeopleprice']?></p>
+                  <p><?php echo $row['limitedpeople']?></p>
+                  <p><?php echo $row['description']?></p>
+                  <a href="banquet/ourservice.php?delete=1&id=<?php echo $row['service_id'] ?>" class="btn btn-primary">Delete</a>
                 </div>            
               </div>
+             </div>
+             <?php 
+           }
+         }
+         ?>
             </div>
-    <?php
-  }
-}
-    ?>        
-    </div>
-    </div>
-  </div>
-</div>
+         </div>
+      </div>
+   </div>
+ </div>
 </body>
 </html>

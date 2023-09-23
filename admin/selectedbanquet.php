@@ -52,39 +52,39 @@ tr:nth-child(even) {
   <tbody>
     <tr>
       <th scope="row">1</th>
+      
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
-      <td></td>
+      <td><button style="color:red">Block</button></td>
     </tr>
     <tr>
       <th scope="row">2</th>
+      
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
-      <td></td>
+      <td><button style="color:red;">Block</button></td>
     </tr>
     <tr>
       <th scope="row">3</th>
+      
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
-      <td></td>
+      <td><button style="color:red">Block</button></td>
     </tr>
     <tr>
       <th scope="row">4</th>
+      
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
-      <td></td>
+      <td><button style="color:red">Block</button></td>
     </tr>
   </tbody>
 </table>

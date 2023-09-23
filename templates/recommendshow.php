@@ -123,7 +123,7 @@ h2::after {
 <div class="container-xl">
   <div class="row">
     <div class="col-md-12">
-      <h2>Our<b>Services</b></h2>
+      <h2>Recommendation</b></h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
       <!-- Carousel indicators -->
       <ol class="carousel-indicators">
