@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once "../database/connection.php";
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,25 +142,37 @@ h2::after {
       <div class="carousel-inner">
         <div class="item carousel-item active">
           <div class="row">
+            <?php
+            $query="SELECT * FROM banquet_tb";
+            $result = mysqli_query($conn, $query);
+            $data=mysqli_num_rows($result);
+
+            if($data>0){
+                while($row=mysqli_fetch_array($result)){
+
+            
+?>
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
+                  <img src="../banquet/banquetimage/<?php echo $row['profile_img']?>" class="img-fluid" alt="">                 
                 </div>
                 <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
+                  <h4><?php echo $row['name']?></h4>                 
       
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="adminbanquetdetail.php" class="btn btn-primary">Show</a>
+                  <p class="item-price"><?php echo $row['address']?></p>
+                  <p></p>
+                  <a href="adminbanquetdetail.php?id=<?php echo $row['id']?>" class="btn btn-primary">Show</a>
                 </div>            
               </div>
             </div>
-            
+    <?php
+  }
+}
+    ?>        
     </div>
     </div>
   </div>
 </div>
-
 </body>
 </html>

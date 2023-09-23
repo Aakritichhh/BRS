@@ -1,3 +1,14 @@
+<?php
+session_start();
+require_once "../database/connection.php";
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    if(isset($_POST['submit'])){
+      $budget=$_POST['budget'];
+      $serviceType=$_POST['service'];
+      $numberOfPeople=$_POST['number'];
+      $location=$_POST['location'];
+      
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,8 +61,11 @@
         <input required="" placeholder="" type="number" class="input">
         <span>Total Number of People</span>
     </label>
-    <button class="submit">Location</button>
-     
+      <button type="button" class="submit" onclick="getLocation()">Location</button>
+
+        <span id="location"></span>
+        <input type="hidden" id="longitudeInput" name="longitude">
+        <input type="hidden" id="latitudeInput" name="latitude">
     <button class="submit">Submit</button>
 
 </form>
@@ -84,6 +98,29 @@
     
     });
   });
+
+   function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert('Geolocation is not supported by this browser.');
+      }
+    }
+
+    function showPosition(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      
+      // Display location in span tag
+      var locationSpan = document.getElementById('location');
+      locationSpan.innerHTML = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
+      
+      // Store values in hidden input fields
+      var latitudeInput = document.getElementById('latitudeInput');
+      var longitudeInput = document.getElementById('longitudeInput');
+      latitudeInput.value = latitude;
+      longitudeInput.value = longitude;
+    }
 </script>
 
 

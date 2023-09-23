@@ -122,7 +122,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                             <span class="error" style="color:red;"><?php echo isset($errors["address"]) ? $errors["address"] : ""; ?></span>
                         </div>
                         <div class="input-field">
-                            <button type="button" onclick="getlocation">Get Location</button>
+                            <button type="button" onclick="getLocation()">Get Location</button>
+
                             <span id="location"></span>
                             <input type="hidden" id="longitudeInput" name="longitude">
                             <input type="hidden" id="latitudeInput" name="latitude">

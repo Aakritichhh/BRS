@@ -152,7 +152,8 @@ h2::after {
         <div class="item carousel-item active">
           <div class="row">
             <?php
-            $query="SELECT * FROM service";
+            $banquetid=$_SESSION['banquetid'];
+            $query="SELECT * FROM service WHERE banquetid='$banquetid'";
             $result=mysqli_query($conn, $query);
             $data=mysqli_num_rows($result);
             if($data>0){

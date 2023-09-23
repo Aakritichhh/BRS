@@ -162,7 +162,8 @@ tr:nth-child(even) {
         <div class="item carousel-item active">
           <div class="row">
             <?php
-            $query="SELECT * FROM service";
+            $banquetid=$_GET['id'];
+            $query="SELECT * FROM service WHERE banquetid='$banquetid'";
             $result=mysqli_query($conn, $query);
             $data=mysqli_num_rows($result);
             if($data>0){
@@ -172,7 +173,7 @@ tr:nth-child(even) {
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
-                  <img src="banquetimage/<?php echo $row['serviceimage']?>" class="img-fluid" alt="">                 
+                  <img src="../banquet/banquetimage/<?php echo $row['serviceimage']?>" class="img-fluid" alt="">                 
                 </div>
                 <div class="thumb-content">
                   <h4><?php echo $row['title']?></h4>                 
