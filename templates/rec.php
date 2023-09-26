@@ -7,7 +7,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       $serviceType=$_POST['service'];
       $numberOfPeople=$_POST['number'];
       $location=$_POST['location'];
-      
+    }
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,5 +124,3 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       longitudeInput.value = longitude;
     }
 </script>
-
-

@@ -8,6 +8,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $contact=$_POST['contact'];
         $address=$_POST['address'];
         $id=$_SESSION['banquetid'];
+        $longitude=$_POST['longitude'];
+        $latitude=$_POST['latitude'];
         $targetDirectory="banquetimage/";
         $extension = pathinfo($_FILES['profileimage']['name'], PATHINFO_EXTENSION);
         $uniqueFilename = uniqid() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
@@ -47,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
    }
          
         if (empty($errors)) {
-            $query= "UPDATE banquet_tb SET name='$username',email='$email',contact='$contact',address='$address', profile_img='$uniqueFilename' WHERE id='$id'";
+            $query= "UPDATE banquet_tb SET name='$username',email='$email',contact='$contact',address='$address', profile_img='$uniqueFilename',latitude='$latitude',longitude='$longitude' WHERE id='$id'";
 
             $execute=mysqli_query($conn, $query);
             if($execute && move_uploaded_file($_FILES['profileimage']['tmp_name'],$targetFile)){
@@ -112,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                             <span class="error" style="color:red;"><?php echo isset($errors["email"]) ? $errors["email"] : ""; ?></span>
                         </div>
                         <div class="input-field">
-                            <input type="text" class="input" id="contact" required autocomplete="off" name="contact">
+                            <input type="number" class="input" id="contact" required autocomplete="off" name="contact">
                             <label for="contact">Contact Details</label>
                             <span class="error" style="color:red;"><?php echo isset($errors["contact"]) ? $errors["contact"] : ""; ?></span>
                         </div>

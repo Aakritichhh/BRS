@@ -1,3 +1,7 @@
+<?php
+session_start();
+require('../database/connection.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,57 +50,39 @@ tr:nth-child(even) {
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">S.N</th>
-      <th scope="col">Username</th>
-      <th scope="col">Address</th>
-      <th scope="col">Contact</th>
+      <th scope="col">User Id</th>
+      <th scope="col">Order Id</th>
+      <th scope="col">Banquet Id</th>
       <th scope="col">Service Type</th>
       <th scope="col">Booked Date</th>
       <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
+         <?php
+            $banquetid=$_SESSION['banquetid'];
+            $query="SELECT * FROM orders WHERE banquetid='$banquetid'";
+            $result=mysqli_query($conn, $query);
+            $data=mysqli_num_rows($result);
+            if($data>0){
+                while($row=mysqli_fetch_array($result)){
+
+            ?>
     <tr>
-      <th scope="row">1</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color: green;">Accept</button>
-      <button style="color:red;">Reject</button></td>
+      <th scope="row"><?php echo $row['userid']?></th>
+      <td><?php echo $row['orderid']?></td>
+      <td><?php echo $row['banquetid']?></td>
+      <td><?php echo $row['servicetype']?></td>
+      <td><?php echo $row['date']?></td> 
+      <td><button style="color:green">Accept</button>
+      <button style="color:red">Decline</button></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color: green;">Accept</button>
-      <button style="color:red;">Reject</button></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color: green;">Accept</button>
-      <button style="color:red;">Reject</button></td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color: green;">Accept</button>
-      <button style="color:red;">Reject</button></td>
-    </tr>
+    <?php
+}
+}
+  ?>
   </tbody>
+
 </table>
 </body>
 </html>

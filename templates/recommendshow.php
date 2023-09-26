@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once "../database/connection.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,13 +122,12 @@ h2::after {
         <a href="userbanqdetails.php">My Order</a>
         <a href="changepassword.php">Change Password</a>
         <a href="logout.php">Logout</a>
-        
-      </div>
+      </div> 
     </nav>
 <div class="container-xl">
   <div class="row">
     <div class="col-md-12">
-      <h2>Recommendation</b></h2>
+      <h2>Recommended<b>Banquet</b></h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
       <!-- Carousel indicators -->
       <ol class="carousel-indicators">
@@ -135,37 +139,42 @@ h2::after {
       <div class="carousel-inner">
         <div class="item carousel-item active">
           <div class="row">
+            <?php
+            $query = "SELECT * FROM banquet_tb";
+            $result = mysqli_query($conn, $query);
+
+          // Check if the query was successful
+       if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+          ?>
+                
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
+                  <img src="../banquet/banquetimage/<?php echo $row['profile_img']?>" class="img-fluid" alt="">                 
                 </div>
                 <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
+                  <h4><?php echo $row['name']?></h4>                 
       
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="order.php" class="btn btn-primary">Book</a>
+                  <p class="item-price"><?php echo $row['contact']?></p>
+                  <p><?php echo $row['address']?></p>
+                  
+     
+                  <a href="order.php?id=<?php echo $row['id']?>" class="btn btn-primary">Book</a>
                 </div>            
               </div>
+             </div>
+
+             <?php
+             
+             }
+           }
+           ?>
             </div>
-            
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="order.php" class="btn btn-primary">Book</a>
-                </div>            
-              </div>
-            </div>       
-    </div>
-    </div>
-  </div>
-</div>
+         </div>
+      </div>
+   </div>
+ </div>
+ 
 </body>
-</html>                                   
+</html>
