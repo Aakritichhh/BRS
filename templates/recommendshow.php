@@ -1,3 +1,6 @@
+<?php
+require "algorithm.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,34 +138,29 @@ h2::after {
       <div class="carousel-inner">
         <div class="item carousel-item active">
           <div class="row">
+            <?php
+            $i = 0;
+            foreach($nearestThree as $items) {
+            ?>
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
                   <img src="images/3.png" class="img-fluid" alt="">                 
                 </div>
                 <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
+                  <h4><?php echo $nearestThree[$i]['name'] ?></h4>                 
       
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="order.php" class="btn btn-primary">Book</a>
+                  <p class="item-price"><?php echo $nearestThree[$i]['contact'] ?></p>
+                  <p><?php echo $nearestThree[$i]['address'] ?></p>
+                  <a href="order.php?id=<?php echo $nearestThree[$i]['id'] ?>" class="btn btn-primary">Book</a>
                 </div>            
               </div>
             </div>
-            
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="order.php" class="btn btn-primary">Book</a>
-                </div>            
-              </div>
-            </div>       
+
+            <?php
+            $i++;
+            }
+            ?>     
     </div>
     </div>
   </div>

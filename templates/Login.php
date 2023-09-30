@@ -61,11 +61,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
    <p class="form-title">Sign in to your account</p>
    <div class="input-container">
       <input placeholder="Enter email" type="email" name="email">
-      <span style="color:red;"><?php echo $emailError ?></span>
+      <span style="color:red;"><?php echo isset($emailError) ? $emailError : "" ?>></span>
    </div>
    <div class="input-container">
       <input placeholder="Enter password" type="password" name="password">
-      <span style="color:red;"><?php echo $passwordError ?></span>
+      <span style="color:red;"><?php echo isset($passwordError) ? $passwordError : "" ?></span>
    </div>
    <input class="submit" type="submit" name="login" value="Login">
    <p class="signup-link">

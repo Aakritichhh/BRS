@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('../database/connection.php');
+$id = $_GET['id'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if(isset($_POST['orders']))
   {
