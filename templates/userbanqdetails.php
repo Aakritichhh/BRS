@@ -187,6 +187,7 @@ tr:nth-child(even) {
       <td><?php echo $row['banquetid']?></td>
       <td><?php echo $row['servicetype']?></td>
       <td><?php echo $row['date']?></td> 
+      <td><?php echo $row['status']?></td> 
     </tr>
     <?php
 }

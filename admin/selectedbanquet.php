@@ -69,7 +69,7 @@ tr:nth-child(even) {
       <td><?php echo $row['username'] ?></td>
       <td><?php echo $row['email'] ?></td>
       <td><?php echo $row['contact'] ?></td>
-      <td><button style="color:red">Block</button></td>
+      <td><button style="color:red" class="blockButton" data-userid="<?php echo $row['id'] ?>">Block</button></td>
     </tr>
   </tbody>
   <?php
@@ -77,5 +77,32 @@ tr:nth-child(even) {
 }
 ?>
 </table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.blockButton').click(function() {
+            var userId = $(this).data('userid');
+            blockUser(userId);
+        });
+
+        function blockUser(userId) {
+            $.ajax({
+                type: "POST",
+                url: 'blockuser.php', 
+                data: {
+                    userId: userId
+                },
+                success: function(response) {
+                    alert(response);
+                    
+                },
+                error: function() {
+                    alert("Error blocking the user.");
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
