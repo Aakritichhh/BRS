@@ -1,13 +1,14 @@
 <?php
 session_start();
 require('../database/connection.php');
-$banquetid=$_GET['id'];
+$banquetid=3;
+$userid=$_SESSION['userid'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if(isset($_POST['orders']))
+  if(isset($_POST['submit']))
   {
     $eventDate = $_POST["date"];
     $numberOfPeople = $_POST["noofpeople"];
-    $serviceType = $_POST["servicetype"];
+    $serviceType = $_POST["servicetypes"]; 
 
     $errors = [];
 
@@ -23,10 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (count($errors) === 0) {
-        //database
-        $successMessage = "Form submitted successfully!";
+        $query= "INSERT INTO orders (date,noofpeople,servicetype,banquetid,userid) VALUES ('$eventDate','$numberOfPeople','$serviceType','$banquetid','$userid')";
+          
+        
+      if (mysqli_query($conn,$query)) {
+            echo "Form submitted successfully!";
+        } else {
+            $errors[] = "Error: " . mysqli_error($conn);
+        }
+    
     }
-}
+  }
 }
 ?>
 
@@ -46,18 +54,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Order Form
         </div>
 
-        <form class="form" method="post" action="">
+        <form class="form" method="post" action="#">
             <div class="form-group">
                 <label for="date">Date</label>
                 <input type="date" id="event-date" name="date" placeholder="Event Date" required="">
                 <label for="number">Number of People</label>
               <input type="number" id="number-of-people" name="noofpeople" placeholder="Number of People" required="">
-
                  <label>
                     <span>Service type</span>
     
                     <select id="service" name="servicetypes" class="input" required>
-                        <option value="">Select a Service</option>
+                        <option>Select a Service</option>
+                        
+                    
          <?php
             $query="SELECT * FROM service where banquetid='$banquetid'";
             $result = mysqli_query($conn, $query);
@@ -68,18 +77,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             
         ?>
-                     <option><?php echo $row['title']?></option>
+                     <option value="<?php echo $row['title']?>"><?php echo $row['title']?></option>
+
                      <?php
         }
     }
-    ?>
+    ?> 
                     </select>
 
                     
                 </label>
             </div>
             
-            <button class="form-submit-btn" type="submit" >Book the Venue</button>
+            <input class="form-submit-btn" type="submit" name="submit">
               
         </form>
         

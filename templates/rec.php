@@ -50,12 +50,21 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     <span>Service type</span>
     <select id="service" type="service" class="input" required>
         <option></option>
-        <option value="Weaning Ceremony">For Weaning Ceremony</option>
-        <option value="Weeding Ceremony">For Weeding Ceremony</option>
-        <option value="Birthday Celebration">For Birthday Celebration</option>
-        <option value="Holiday Celebrations">For Holiday Celebrations</option>
-        <option value="Farewell Programs">For Farewell Programs</option>
-          <option value="Charity Events">For Charity Events</option>
+        <?php
+            $query="SELECT * FROM service";
+            $result = mysqli_query($conn, $query);
+            $data=mysqli_num_rows($result);
+
+            if($data>0){
+                while($row=mysqli_fetch_array($result)){
+
+            
+        ?>
+                     <option><?php echo $row['title']?></option>
+                     <?php
+        }
+    }
+    ?>
         </select>
       </label>
 

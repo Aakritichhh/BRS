@@ -161,7 +161,7 @@
       </div>
       <!-- about section end -->
       <!-- projects section start -->
-      <!--<div class="projects_section layout_padding">
+      <div class="projects_section layout_padding">
          <div class="container">
             <div class="projects_section_2">
                <div class="row">
@@ -180,7 +180,7 @@
                </div>
             </div>
          </div>
-      </div>-->
+      </div>
       
       <!-- projects section end -->
       <!-- services section start -->
