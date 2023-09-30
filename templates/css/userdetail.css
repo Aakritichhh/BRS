@@ -1,0 +1,83 @@
+/*  import google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+*{
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body{
+  background:white;
+}
+
+.container{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Side menubar section */
+nav{
+  background: lightgray;
+  width: 15rem;
+}
+.side_navbar{
+  padding: 1px;
+  display: flex;
+  flex-direction: column;
+}
+.side_navbar span{
+  color: gray;
+  margin: 1rem 3rem;
+  font-size: 12px;
+}
+.side_navbar a{
+  width: 100%;
+  padding: 1rem 3rem;
+  font-weight: 500;
+  font-size: 15px;
+  color: rgb(100, 100, 100);
+}
+.side_navbar a:hover{
+  background: rgb(235, 235, 235);
+}
+.side_navbar .active{
+  border-left: 2px solid rgb(100, 100, 100);
+}
+
+/* Main Body Section */
+.main-body{
+  width: 70%;
+  padding: 5rem 2rem;
+  padding-right: 200px;
+  padding-left: 100px;
+}
+.promo_card{
+  width: 100%;
+  color: white;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 1rem 1rem 1rem 3rem;
+  background: black;
+}
+.promo_card h1, .promo_card span, button{
+  margin: 10px;
+}
+.promo_card button{
+  display: block;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.history_lists{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+

@@ -1,3 +1,7 @@
+<?php
+session_start();
+require('../database/connection.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,78 +29,101 @@ th, td {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-
+.declineorder {
+    background-color: #ff9999;
+}
 </style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <nav>
-      <div class="side_navbar">
-        <span>Main Menu</span>
-        <a href="banquetprofile.php" class="active">Dashboard</a>
-        <a href="newbanquet.php">Edit Banquet</a>
-        <a href="ourservice.php">Our Services</a>
-        <a href="newservices.php">Add Services</a>
-        <a href="orderdetails.php">Order Details</a>
-        <a href="logoutbanquet.php">Logout</a>
-        
-      </div>
+        <div class="side_navbar">
+            <span>Main Menu</span>
+            <a href="banquetprofile.php" class="active">Dashboard</a>
+            <a href="newbanquet.php">Edit Banquet</a>
+            <a href="ourservice.php">Our Services</a>
+            <a href="newservices.php">Add Services</a>
+            <a href="orderdetails.php">Order Details</a>
+            <a href="logoutbanquet.php">Logout</a>
+        </div>
     </nav>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">S.N</th>
-      <th scope="col">Username</th>
-      <th scope="col">Address</th>
-      <th scope="col">Contact</th>
-      <th scope="col">Service Type</th>
-      <th scope="col">Booked Date</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color: green;">Accept</button>
-      <button style="color:red;">Reject</button></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color: green;">Accept</button>
-      <button style="color:red;">Reject</button></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color: green;">Accept</button>
-      <button style="color:red;">Reject</button></td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color: green;">Accept</button>
-      <button style="color:red;">Reject</button></td>
-    </tr>
-  </tbody>
-</table>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">User Id</th>
+            <th scope="col">Order Id</th>
+            <th scope="col">Banquet Id</th>
+            <th scope="col">Service Type</th>
+            <th scope="col">Booked Date</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $banquetid = $_SESSION['banquetid'];
+        $query = "SELECT * FROM orders WHERE banquetid='$banquetid'";
+        $result = mysqli_query($conn, $query);
+        $data = mysqli_num_rows($result);
+        if ($data > 0) {
+            while ($row = mysqli_fetch_array($result)) {
+                ?>
+                <tr>
+                    <th scope="row"><?php echo $row['userid'] ?></th>
+                    <td><?php echo $row['orderid'] ?></td>
+                    <td><?php echo $row['banquetid'] ?></td>
+                    <td><?php echo $row['servicetype'] ?></td>
+                    <td><?php echo $row['date'] ?></td>
+                    <td>
+                        <button style="color:green" class="acceptButton"
+                                data-orderid="<?php echo $row['orderid'] ?>">Accept
+                        </button>
+                        <button style="color:red" class="declineButton"
+                                data-orderid="<?php echo $row['orderid'] ?>">Decline
+                        </button>
+                    </td>
+                </tr>
+                <?php
+            }
+        }
+        ?>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.acceptButton').click(function () {
+            var orderId = $(this).data('orderid');
+            sendAction(orderId, 'Accept');
+        });
+
+        $('.declineButton').click(function () {
+            var orderId = $(this).data('orderid');
+            sendAction(orderId, 'Decline');
+        });
+
+        function sendAction(orderId, action) {
+            $.ajax({
+                type: "POST",
+                url: action === 'Accept' ? 'acceptorder.php' : 'declineorder.php',
+                data: {
+                    orderId: orderId
+                },
+                success: function (response) {
+                    alert(response);
+                    if (action === 'Decline') {
+                        $(this).closest('tr').addClass('declineorder');
+                    }
+                },
+                error: function () {
+                    alert("Error performing the action.");
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 </html>

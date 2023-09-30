@@ -120,13 +120,12 @@ h2::after {
         <a href="userbanqdetails.php">My Order</a>
         <a href="changepassword.php">Change Password</a>
         <a href="logout.php">Logout</a>
-        
-      </div>
+      </div> 
     </nav>
 <div class="container-xl">
   <div class="row">
     <div class="col-md-12">
-      <h2>Recommendation</b></h2>
+      <h2>Recommended<b>Banquet</b></h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
       <!-- Carousel indicators -->
       <ol class="carousel-indicators">
@@ -145,7 +144,7 @@ h2::after {
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
+                  <img src="../banquet/banquetimage/<?php echo $row['profile_img']?>" class="img-fluid" alt="">                 
                 </div>
                 <div class="thumb-content">
                   <h4><?php echo $nearestThree[$i]['name'] ?></h4>                 
@@ -166,4 +165,4 @@ h2::after {
   </div>
 </div>
 </body>
-</html>                                   
+</html>

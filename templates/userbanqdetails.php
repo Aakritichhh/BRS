@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once "../database/connection.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +13,12 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/userpage.css" />
+<link rel="stylesheet" href="css/userdetail.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
+
 body {
   background: #e2eaef;
   font-family: "Open Sans", sans-serif;
@@ -104,6 +111,23 @@ h2::after {
   padding: 2px 0;
 }
 
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+
 </style>
 
 </head>
@@ -123,7 +147,7 @@ h2::after {
     <div class="container-xl">
   <div class="row">
     <div class="col-md-12">
-      <h2>My<b>Order Details</b></h2>
+      <h2>Order<b>Details</b></h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
       <!-- Carousel indicators -->
       <ol class="carousel-indicators">
@@ -131,68 +155,46 @@ h2::after {
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>   
-      <!-- Wrapper for carousel items -->
-      <div class="carousel-inner">
-        <div class="item carousel-item active">
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-      
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-      
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="thumb-wrapper">
-                <div class="img-box">
-                  <img src="images/3.png" class="img-fluid" alt="">                 
-                </div>
-                <div class="thumb-content">
-                  <h4>Kalimati Banquet</h4>                 
-                  <p class="item-price">150000</p>
-                  <p>Kalimati</p>
-                  <a href="#" class="btn btn-primary">Add to Your List</a>
-                </div>            
-              </div>
-            </div>
-              
-    </div>
     </div>
   </div>
 </div>
+
+
+ <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">User Id</th>
+      <th scope="col">Order Id</th>
+      <th scope="col">Banquet Id</th>
+      <th scope="col">Service Type</th>
+      <th scope="col">Booked Date</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+            $userid=$_SESSION['userid'];
+            $query="SELECT * FROM orders WHERE userid='$userid'";
+            $result=mysqli_query($conn, $query);
+            $data=mysqli_num_rows($result);
+            if($data>0){
+                while($row=mysqli_fetch_array($result)){
+
+            ?>
+    <tr>
+      <th scope="row"><?php echo $row['userid']?></th>
+      <td><?php echo $row['orderid']?></td>
+      <td><?php echo $row['banquetid']?></td>
+      <td><?php echo $row['servicetype']?></td>
+      <td><?php echo $row['date']?></td> 
+      <td><?php echo $row['status']?></td> 
+    </tr>
+    <?php
+}
+}
+  ?>
+  </tbody>
+</div>
+</table>
 </body>
-</html>                                   
+</html>

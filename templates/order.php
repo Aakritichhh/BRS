@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('../database/connection.php');
-$id = $_GET['id'];
+$banquetid=$_GET['id'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if(isset($_POST['orders']))
   {
@@ -55,19 +55,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                  <label>
                     <span>Service type</span>
+    
                     <select id="service" name="servicetypes" class="input" required>
                         <option value="">Select a Service</option>
-                        <option value="Weaning Ceremony">For Weaning Ceremony</option>
-                        <option value="Wedding Ceremony">For Wedding Ceremony</option>
-                        <option value="Birthday Celebration">For Birthday Celebration</option>
-                        <option value="Holiday Celebrations">For Holiday Celebrations</option>
-                        <option value="Farewell Programs">For Farewell Programs</option>
-                        <option value="Charity Events">For Charity Events</option>
+         <?php
+            $query="SELECT * FROM service where banquetid='$banquetid'";
+            $result = mysqli_query($conn, $query);
+            $data=mysqli_num_rows($result);
+
+            if($data>0){
+                while($row=mysqli_fetch_array($result)){
+
+            
+        ?>
+                     <option><?php echo $row['title']?></option>
+                     <?php
+        }
+    }
+    ?>
                     </select>
+
+                    
                 </label>
             </div>
-            <button class="form-submit-btn" type="submit">Book the Venue</button>
+            
+            <button class="form-submit-btn" type="submit" >Book the Venue</button>
+              
         </form>
+        
         <?php if (isset($errors)): ?>
             <div class="error-messages">
                 <?php foreach ($errors as $error): ?>

@@ -120,5 +120,3 @@ require_once "../database/connection.php";
       longitudeInput.value = longitude;
     }
 </script>
-
-

@@ -1,3 +1,8 @@
+<?php
+session_start();
+require('../database/connection.php');
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,55 +46,63 @@ tr:nth-child(even) {
     </nav><table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">S.N</th>
+      <th scope="col">Id</th>
       <th scope="col">Username</th>
       <th scope="col">Email</th>
       <th scope="col">Contact Number</th>
-      <th scope="col">Address</th>
       <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
+    <?php
+    $query="SELECT * FROM user";
+ $result = mysqli_query($conn, $query);
+ $data=mysqli_num_rows($result);
+
+  if($data>0){
+   while($row=mysqli_fetch_array($result)){
+?>
+
     <tr>
-      <th scope="row">1</th>
+      <th scope="row"><?php echo $row['id'] ?></th>
       
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color:red">Block</button></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color:red;">Block</button></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color:red">Block</button></td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><button style="color:red">Block</button></td>
+      <td><?php echo $row['username'] ?></td>
+      <td><?php echo $row['email'] ?></td>
+      <td><?php echo $row['contact'] ?></td>
+      <td><button style="color:red" class="blockButton" data-userid="<?php echo $row['id'] ?>">Block</button></td>
     </tr>
   </tbody>
+  <?php
+ }
+}
+?>
 </table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.blockButton').click(function() {
+            var userId = $(this).data('userid');
+            blockUser(userId);
+        });
 
+        function blockUser(userId) {
+            $.ajax({
+                type: "POST",
+                url: 'blockuser.php', 
+                data: {
+                    userId: userId
+                },
+                success: function(response) {
+                    alert(response);
+                    
+                },
+                error: function() {
+                    alert("Error blocking the user.");
+                }
+            });
+        }
+    });
+</script>
 
-    
 </body>
 </html>
