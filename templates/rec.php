@@ -41,12 +41,12 @@ require_once "../database/connection.php";
     <span>Service type</span>
     <select id="service" name="service" class="input" required>
         <option></option>
-        <option value="Weaning Ceremony">For Weaning Ceremony</option>
-        <option value="Weeding Ceremony">For Weeding Ceremony</option>
-        <option value="Birthday Celebration">For Birthday Celebration</option>
-        <option value="Holiday Celebrations">For Holiday Celebrations</option>
-        <option value="Farewell Programs">For Farewell Programs</option>
-          <option value="Charity Events">For Charity Events</option>
+        <option value="Weaning Ceremony">Weaning Ceremony</option>
+        <option value="Weeding Ceremony">Weeding Ceremony</option>
+        <option value="Birthday Celebration">Birthday Celebration</option>
+        <option value="Holiday Celebrations">Holiday Celebrations</option>
+        <option value="Farewell Programs">Farewell Programs</option>
+          <option value="Charity Events">Charity Events</option>
         </select>
       </label>
 

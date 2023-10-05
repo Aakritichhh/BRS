@@ -125,7 +125,14 @@ h2::after {
 <div class="container-xl">
   <div class="row">
     <div class="col-md-12">
+    
       <h2>Recommended<b>Banquet</b></h2>
+      <?php
+      if($noData){
+        echo "<h3>No Banquet Found. Try Again</h3>";
+        exit();
+      }
+      ?>
       <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
       <!-- Carousel indicators -->
       <ol class="carousel-indicators">
@@ -134,6 +141,7 @@ h2::after {
         <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>   
       <!-- Wrapper for carousel items -->
+     
       <div class="carousel-inner">
         <div class="item carousel-item active">
           <div class="row">
@@ -144,14 +152,14 @@ h2::after {
             <div class="col-sm-3">
               <div class="thumb-wrapper">
                 <div class="img-box">
-                  <img src="../banquet/banquetimage/<?php echo $row['profile_img']?>" class="img-fluid" alt="">                 
+                  <img src="../banquet/banquetimage/<?php echo $items['image']?>" class="img-fluid" alt="">                 
                 </div>
                 <div class="thumb-content">
-                  <h4><?php echo $nearestThree[$i]['name'] ?></h4>                 
+                  <h4><?php echo $items['name'] ?></h4>                 
       
-                  <p class="item-price"><?php echo $nearestThree[$i]['contact'] ?></p>
-                  <p><?php echo $nearestThree[$i]['address'] ?></p>
-                  <a href="order.php?id=<?php echo $nearestThree[$i]['id'] ?>" class="btn btn-primary">Book</a>
+                  <p class="item-price"><?php echo $items['contact'] ?></p>
+                  <p><?php echo $items['address'] ?></p>
+                  <a href="order.php?id=<?php echo $items['id'] ?>" class="btn btn-primary">Book</a>
                 </div>            
               </div>
             </div>

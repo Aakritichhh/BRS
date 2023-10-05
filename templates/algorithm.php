@@ -9,25 +9,30 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $longitude=$_POST['longitude'];
     $latitude=$_POST['latitude'];
 
-    $sql = "SELECT * FROM banquet_tb";
+    $perPeoplePrice = $budget / $numberOfPeople;
+    $noData = false;
+
+    $sql = "SELECT * FROM banquet_tb JOIN service ON banquet_tb.id = service.banquetid WHERE service.title = '$serviceType' AND service.limitedpeople >= '$numberOfPeople' AND service.perpeopleprice <= '$perPeoplePrice'";
     $retval = mysqli_query($conn, $sql);
     $data = mysqli_num_rows($retval);
 
-    if($data = 0){
-      echo "no data found in database";
-      exit();
+    if($data == 0){
+      $noData = true;
+
+    } else{
+      while($row = mysqli_fetch_assoc($retval)) {
+        $distance = haversine($latitude, $longitude, $row['latitude'], $row['longitude']);
+        $distances[] = ['id' => $row['id'], 'distance' => $distance, 'name' => $row['name'], 'address' => $row['address'], 'contact' => $row['contact'], 'image' => $row['profile_img']];
+      }
+  
+      usort($distances, function($a, $b) {
+        return $a['distance'] <=> $b['distance'];
+      });
+  
+      $nearestThree = array_slice($distances, 0, 3);
     }
 
-    while($row = mysqli_fetch_assoc($retval)) {
-      $distance = haversine($latitude, $longitude, $row['latitude'], $row['longitude']);
-      $distances[] = ['id' => $row['id'], 'distance' => $distance, 'name' => $row['name'], 'address' => $row['address'], 'contact' => $row['contact']];
-    }
-
-    usort($distances, function($a, $b) {
-      return $a['distance'] <=> $b['distance'];
-    });
-
-    $nearestThree = array_slice($distances, 0, 3);
+    
 
   }
 }
