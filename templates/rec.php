@@ -41,12 +41,22 @@ require_once "../database/connection.php";
     <span>Service type</span>
     <select id="service" name="service" class="input" required>
         <option></option>
-        <option value="Weaning Ceremony">Weaning Ceremony</option>
-        <option value="Weeding Ceremony">Weeding Ceremony</option>
-        <option value="Birthday Celebration">Birthday Celebration</option>
-        <option value="Holiday Celebrations">Holiday Celebrations</option>
-        <option value="Farewell Programs">Farewell Programs</option>
-          <option value="Charity Events">Charity Events</option>
+
+        <?php
+            $query="SELECT * FROM service";
+            $result = mysqli_query($conn, $query);
+            $data=mysqli_num_rows($result);
+
+            if($data>0){
+                while($row=mysqli_fetch_array($result)){
+
+            
+        ?>
+                     <option><?php echo $row['title']?></option>
+                     <?php
+        }
+    }
+    ?>
         </select>
       </label>
 
