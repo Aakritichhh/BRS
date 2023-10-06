@@ -1,15 +1,6 @@
 <?php
 session_start();
 require_once "../database/connection.php";
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-    if(isset($_POST['submit'])){
-      $budget=$_POST['budget'];
-      $serviceType=$_POST['service'];
-      $numberOfPeople=$_POST['number'];
-      $location=$_POST['location'];
-    }
-  }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,19 +28,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     <div class="main-body">
       <h2>Dashboard</h2>
-      <form class="form">
+      <form class="form" action="recommendshow.php" method="post">
     <p class="title">Banquet Near Me</p>
     <p class="message">Fill the details to find the best banquet for you </p> 
             
     <label>
-        <input required="" placeholder="" type="budget" class="input">
+        <input required="" placeholder="" type="number"  name="budget" class="input">
         <span>Budget</span>
     </label> 
         
     <label>
     <span>Service type</span>
-    <select id="service" type="service" class="input" required>
+    <select id="service" name="service" class="input" required>
         <option></option>
+
         <?php
             $query="SELECT * FROM service";
             $result = mysqli_query($conn, $query);
@@ -69,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       </label>
 
     <label>
-        <input required="" placeholder="" type="number" class="input">
+        <input required="" placeholder="" name="number" type="number" class="input">
         <span>Total Number of People</span>
     </label>
       <button type="button" class="submit" onclick="getLocation()">Location</button>
@@ -77,38 +69,43 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         <span id="location"></span>
         <input type="hidden" id="longitudeInput" name="longitude">
         <input type="hidden" id="latitudeInput" name="latitude">
-    <button class="submit">Submit</button>
+        <input type="submit" name="submit" class="submit" value="Submit" />
 
 </form>
       </div>
 </body>
 </html>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector(".form");
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   const form = document.querySelector(".form");
+  //   form.addEventListener("submit", function (event) {
+  //     event.preventDefault();
 
-      const budget = document.querySelector(".input[type='budget']").value;
-      const service = document.querySelector(".input[type='service']").value;
-      const totalPeople = document.querySelector(".input[type='number']").value;
+  //     const budget = document.querySelector(".input[type='budget']").value;
+  //     const service = document.querySelector(".input[type='service']").value;
+  //     const totalPeople = document.querySelector(".input[type='number']").value;
 
-      // Validate budget (assuming it should be a positive number)
-      if (!budget || isNaN(parseFloat(budget)) || parseFloat(budget) <= 0) {
-        alert("Please enter a valid budget.");
-        return;
-      }
+  //     // Validate budget (assuming it should be a positive number)
+  //     if (!budget || isNaN(parseFloat(budget)) || parseFloat(budget) <= 0) {
+  //       alert("Please enter a valid budget.");
+  //       return;
+  //     }
 
-      // Validate total number of people
-      if (!totalPeople || isNaN(parseInt(totalPeople)) || parseInt(totalPeople) <= 0) {
-        alert("Please enter a valid total number of people.");
-        return;
-      }
+  //     if (!service) {
+  //           alert("Please select a service type.");
+  //           return;
+  //       }
 
-      alert("Form submitted successfully!");
+  //     // Validate total number of people
+  //     if (!totalPeople || isNaN(parseInt(totalPeople)) || parseInt(totalPeople) <= 0) {
+  //       alert("Please enter a valid total number of people.");
+  //       return;
+  //     }
+
+  //     form.submit();
     
-    });
-  });
+  //   });
+  // });
 
    function getLocation() {
       if (navigator.geolocation) {
